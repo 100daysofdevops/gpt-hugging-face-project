@@ -44,9 +44,9 @@ jobs:
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
 
 
-    - name: Scan Docker image with Trivy (Vulnerability Scanning Only)
+    - name: Scan Docker image with Trivy
       run: |
-        trivy image --scanners vuln $ECR_REPOSITORY:$GITHUB_SHA
+        trivy image --severity HIGH,CRITICAL $ECR_REPOSITORY:$GITHUB_SHA
 
     - name: Push Docker image to Amazon ECR
       run: |
