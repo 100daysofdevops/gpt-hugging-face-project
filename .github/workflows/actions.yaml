@@ -1,4 +1,4 @@
-name: Build and Deploy to EKS
+name: CI/CD Pipeline for EKS Deployment
 
 on:
   push:
