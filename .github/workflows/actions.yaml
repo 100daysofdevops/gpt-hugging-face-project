@@ -43,6 +43,11 @@ jobs:
       run: |
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
 
+    - name: Clean up disk space
+      run: |
+        sudo rm -rf /var/lib/apt/lists/*
+        sudo apt-get clean
+
 
     - name: Scan Docker image with Trivy
       run: |
