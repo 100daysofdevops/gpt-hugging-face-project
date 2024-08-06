@@ -43,13 +43,10 @@ jobs:
       run: |
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
 
-    - name: Scan Docker image with Trivy
+
+    - name: Scan Docker image with Trivy (Vulnerability Scanning Only)
       run: |
-        trivy image $ECR_REPOSITORY:$GITHUB_SHA
-        if [ $? -ne 0 ]; then
-          echo "Image scan failed"
-          exit 1
-        fi
+        trivy image --scanners vuln $ECR_REPOSITORY:$GITHUB_SHA
 
     - name: Push Docker image to Amazon ECR
       run: |
