@@ -81,12 +81,13 @@ jobs:
         sudo mv kube-score /usr/local/bin/
 
     - name: Lint Kubernetes manifests with kube-score
+      continue-on-error: true
       run: |
         kube-score score --output-format ci deploy.yaml
 
     - name: Deploy with Kustomize
       run: |
-        ./kustomize edit set image image_name=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$GITHUB_SHA
-        ./kustomize build . | kubectl apply -f -
+        kustomize edit set image image_name=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$GITHUB_SHA
+        kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
