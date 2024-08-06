@@ -76,8 +76,9 @@ jobs:
 
     - name: Install kube-score
       run: |
-        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-        chmod u+x ./kustomize
+        curl -L -o kube-score https://github.com/zegl/kube-score/releases/download/v1.11.0/kube-score_1.11.0_linux_amd64
+        chmod +x kube-score
+        sudo mv kube-score /usr/local/bin/
 
     - name: Lint Kubernetes manifests with kube-score
       run: |
