@@ -26,7 +26,7 @@ echo "AWS Account ID: $ACCOUNT_ID"
 # Prompt user for cluster name and region
 read -p "Enter the cluster name: " CLUSTER_NAME
 read -p "Enter the AWS region: " REGION
-read -p "Enter the Kubernetes version (e.g., 1.23): " K8S_VERSION
+read -p "Enter the Kubernetes version (e.g., 1.30): " K8S_VERSION
 
 # Validate inputs
 if [[ -z "$CLUSTER_NAME" ]]; then
